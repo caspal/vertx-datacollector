@@ -1,0 +1,79 @@
+plugins {
+  id 'io.vertx.vertx-plugin' version '0.0.7'
+}
+
+apply plugin: 'base'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+apply from: 'dependencies.gradle'
+
+eclipse {
+  project {
+    name = 'vertx-datacollector'
+  }
+  jdt {
+    sourceCompatibility=1.8
+    targetCompatibility=1.8
+  }
+}
+
+vertx {
+  mainVerticle = 'sample.App'
+}
+
+test {
+  dependsOn 'cleanTest'
+  testLogging {
+    events = ["passed", "skipped", "failed", "standardOut", "standardError"]
+  }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '4.5'
+}
+
+task makeDirs {
+  description 'make all dirs for project setup'
+  doLast {
+    def sources = [
+      sourceSets.main,
+      sourceSets.test
+    ]
+    sources*.allSource*.srcDirs.flatten().each { File srcDir ->
+      println "making $srcDir"
+      srcDir.mkdirs()
+    }
+  }
+}
+
+// Generate Service Proxies stuff
+
+sourceSets {
+    generated{
+        java.srcDir "${projectDir}/src/generated/java"
+    }
+}
+
+task generateProxies(type: JavaCompile, group: 'build', 
+             description: 'Generates the Vertx proxies') {
+    source = sourceSets.main.java // input source set
+    classpath = configurations.compile //+ configurations.vertx // add processor module to classpath
+    // specify javac arguments
+    options.compilerArgs = [
+            "-proc:only",
+            "-processor", "io.vertx.codegen.CodeGenProcessor", // vertx processor here
+            "-Acodegen.output=${projectDir}/src/main"
+    ]
+    // specify output of generated code
+    destinationDir = file("${projectDir}/src/generated/java")
+}
+
+compileJava{
+    dependsOn(generateProxies)
+    source    += sourceSets.generated.java
+    // specify javac arguments
+    options.compilerArgs = [
+            "-Acodetrans.output=${projectDir}/src/main"
+    ]
+}
