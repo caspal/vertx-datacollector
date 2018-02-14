@@ -1,0 +1,17 @@
+= Cheatsheets
+
+[[CollectorJobResult]]
+== CollectorJobResult
+
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[created]]`created`|`String`|-
+|[[quality]]`quality`|`String`|-
+|[[requestId]]`requestId`|`String`|-
+|[[result]]`result`|`Json object`|-
+|[[source]]`source`|`String`|-
+|===
+
