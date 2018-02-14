@@ -1,12 +1,12 @@
-plugins {
-  id 'io.vertx.vertx-plugin' version '0.0.7'
-}
-
 apply plugin: 'base'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
 apply from: 'dependencies.gradle'
+// check if gradle.properties is available
+if (project.hasProperty('ossrhUsername')) {
+  apply from: 'maven.gradle'
+}
 
 eclipse {
   project {
@@ -18,12 +18,18 @@ eclipse {
   }
 }
 
-vertx {
-  mainVerticle = 'sample.App'
+task allDocs(group: 'documentation', type: Javadoc) {
+  sourceSets.main.java.srcDir "${projectDir}/src/generated/java"
+
+  source = sourceSets.main.java.srcDirs
+  classpath = sourceSets.main.compileClasspath
+  destinationDir = file("${projectDir}/docs")
 }
 
 test {
   dependsOn 'cleanTest'
+
+  sourceSets.test.java.srcDir "${projectDir}/src/generated/java"
   testLogging {
     events = ["passed", "skipped", "failed", "standardOut", "standardError"]
   }
@@ -33,7 +39,8 @@ task wrapper(type: Wrapper) {
   gradleVersion = '4.5'
 }
 
-task makeDirs {
+task createSourceDirectories(group: 'ide',
+    description: 'Generate source directories') {
   description 'make all dirs for project setup'
   doLast {
     def sources = [
@@ -55,7 +62,7 @@ sourceSets {
     }
 }
 
-task generateProxies(type: JavaCompile, group: 'build', 
+task generateProxies(type: JavaCompile, group: 'build',
              description: 'Generates the Vertx proxies') {
     source = sourceSets.main.java // input source set
     classpath = configurations.compile //+ configurations.vertx // add processor module to classpath
@@ -67,13 +74,4 @@ task generateProxies(type: JavaCompile, group: 'build',
     ]
     // specify output of generated code
     destinationDir = file("${projectDir}/src/generated/java")
-}
-
-compileJava{
-    dependsOn(generateProxies)
-    source    += sourceSets.generated.java
-    // specify javac arguments
-    options.compilerArgs = [
-            "-Acodetrans.output=${projectDir}/src/main"
-    ]
 }
