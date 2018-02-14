@@ -4,15 +4,18 @@ repositories {
 }
 
 dependencies {
+  def vertx_version = '[3.5.1,)'
+
   // Vertx
-  compile group: 'io.vertx', name: 'vertx-service-proxy'
-  compile group: 'io.vertx', name: 'vertx-codegen'
-  
+  compile group: 'io.vertx', name: 'vertx-core', version: vertx_version
+  compile group: 'io.vertx', name: 'vertx-service-proxy', version: vertx_version
+  compile group: 'io.vertx', name: 'vertx-codegen', version: vertx_version
+
   // Utils
-  compile group: 'com.google.guava', name: 'guava', version: '24.0-jre'
-  
+  compile group: 'io.dropwizard.metrics', name: 'metrics-core', version: '4.0.2'
+
   // Test
-  testCompile group: 'io.vertx', name: 'vertx-unit'
+  testCompile group: 'io.vertx', name: 'vertx-unit', version: vertx_version
   testCompile group: 'junit', name: 'junit', version: '4.12'
   testCompile group: 'com.google.truth', name: 'truth', version: '0.39'
 }
