@@ -1,0 +1,6 @@
+info.pascalkrause.vertx.datacollector
+info.pascalkrause.vertx.datacollector.client
+info.pascalkrause.vertx.datacollector.client.error
+info.pascalkrause.vertx.datacollector.job
+info.pascalkrause.vertx.datacollector.metrics
+info.pascalkrause.vertx.datacollector.service
