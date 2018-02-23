@@ -1,0 +1,382 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ffa59769_7663b1fa",
+        "filename": "build.gradle",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "space",
+      "range": {
+        "startLine": 65,
+        "startChar": 55,
+        "endLine": 65,
+        "endChar": 56
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "966d2908_80057c1b",
+        "filename": "src/main/java/info/pascalkrause/vertx/datacollector/client/DataCollectorServiceClient.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "unnecessary empty line",
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d97b55a_9783631e",
+        "filename": "src/main/java/info/pascalkrause/vertx/datacollector/client/error/QueueLimitReached.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "empty line",
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcbcd50c_bd9dceef",
+        "filename": "src/main/java/info/pascalkrause/vertx/datacollector/job/CollectorJob.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "inside the future.",
+      "range": {
+        "startLine": 15,
+        "startChar": 62,
+        "endLine": 15,
+        "endChar": 68
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddf89cf7_80f05315",
+        "filename": "src/main/java/info/pascalkrause/vertx/datacollector/job/CollectorJob.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "method",
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f76540b_381f2538",
+        "filename": "src/main/java/info/pascalkrause/vertx/datacollector/job/CollectorJob.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "inside the future.",
+      "range": {
+        "startLine": 26,
+        "startChar": 74,
+        "endLine": 26,
+        "endChar": 80
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "92fcbc10_100ffbb8",
+        "filename": "src/main/java/info/pascalkrause/vertx/datacollector/job/CollectorJob.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "logic",
+      "range": {
+        "startLine": 30,
+        "startChar": 76,
+        "endLine": 30,
+        "endChar": 82
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c88b219_e0a13bff",
+        "filename": "src/main/java/info/pascalkrause/vertx/datacollector/job/CollectorJobResult.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "empty line",
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c2b56a0_78aa1351",
+        "filename": "src/main/java/info/pascalkrause/vertx/datacollector/metrics/MetricSnapshotFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "private final?",
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3914f12a_314b7dd8",
+        "filename": "src/main/java/info/pascalkrause/vertx/datacollector/metrics/MetricSnapshotFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "test this method",
+      "range": {
+        "startLine": 42,
+        "startChar": 32,
+        "endLine": 42,
+        "endChar": 54
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "abc05c95_cfad1401",
+        "filename": "src/main/java/info/pascalkrause/vertx/datacollector/metrics/MetricSnapshotFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "registerQueueMetrics",
+      "range": {
+        "startLine": 56,
+        "startChar": 16,
+        "endLine": 56,
+        "endChar": 31
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "415aebae_eed89eb0",
+        "filename": "src/main/java/info/pascalkrause/vertx/datacollector/metrics/MetricSnapshotFactory.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "registerTotalMetrics",
+      "range": {
+        "startLine": 64,
+        "startChar": 16,
+        "endLine": 64,
+        "endChar": 39
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49052c48_dccabfe6",
+        "filename": "src/main/java/info/pascalkrause/vertx/datacollector/service/DataCollectorService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "triggers a {@link CollectorJob}",
+      "range": {
+        "startLine": 18,
+        "startChar": 19,
+        "endLine": 18,
+        "endChar": 109
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f743123f_b97ff7af",
+        "filename": "src/main/java/info/pascalkrause/vertx/datacollector/service/DataCollectorService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "result in the passed result handler.",
+      "range": {
+        "startLine": 19,
+        "startChar": 20,
+        "endLine": 19,
+        "endChar": 47
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97b9aa39_1d056f12",
+        "filename": "src/main/java/info/pascalkrause/vertx/datacollector/service/DataCollectorServiceImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "Is this constructor used? If not MetricSnapshotFactory can be final.",
+      "range": {
+        "startLine": 12,
+        "startChar": 6,
+        "endLine": 28,
+        "endChar": 31
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ecc3b9d5_f4f626d5",
+        "filename": "src/main/java/info/pascalkrause/vertx/datacollector/service/DataCollectorServiceImpl.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "space",
+      "range": {
+        "startLine": 71,
+        "startChar": 6,
+        "endLine": 71,
+        "endChar": 7
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33edce46_ce08eb7d",
+        "filename": "src/test/java/info/pascalkrause/vertx/datacollector/TestJob.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "really?",
+      "range": {
+        "startLine": 57,
+        "startChar": 16,
+        "endLine": 57,
+        "endChar": 23
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53444377_de3b022a",
+        "filename": "src/test/java/info/pascalkrause/vertx/datacollector/TestJob.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T16:59:10Z",
+      "side": 1,
+      "message": "empty line",
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
