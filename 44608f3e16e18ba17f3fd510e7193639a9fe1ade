@@ -2,6 +2,178 @@
   "comments": [
     {
       "key": {
+        "uuid": "01f0598d_78cefdb7",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T17:13:19Z",
+      "side": 1,
+      "message": "fail :)",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 117
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ccea124_78702640",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T17:13:19Z",
+      "side": 1,
+      "message": "The Future",
+      "range": {
+        "startLine": 29,
+        "startChar": 162,
+        "endLine": 29,
+        "endChar": 173
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "552a756c_5f348b7c",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T17:13:19Z",
+      "side": 1,
+      "message": "in the Future which is returned by the _collect_ ...",
+      "range": {
+        "startLine": 29,
+        "startChar": 136,
+        "endLine": 29,
+        "endChar": 149
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "417164a3_b31e361f",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T17:13:19Z",
+      "side": 1,
+      "message": "the Future which is returned by the _post ....",
+      "range": {
+        "startLine": 35,
+        "startChar": 120,
+        "endLine": 35,
+        "endChar": 123
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a566548_a9ec4ff8",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T17:13:19Z",
+      "side": 1,
+      "message": "After implementing the CollectorJob,",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 34
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "509e0174_d18f453b",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T17:13:19Z",
+      "side": 1,
+      "message": "methods",
+      "range": {
+        "startLine": 59,
+        "startChar": 115,
+        "endLine": 59,
+        "endChar": 121
+      },
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3abd38ce_feb7ab2c",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T17:13:19Z",
+      "side": 1,
+      "message": "The latest",
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a805cd9d_5e539d27",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1011458
+      },
+      "writtenOn": "2018-02-23T17:13:19Z",
+      "side": 1,
+      "message": "An Eclipse formatter can be found in the _resources_ folder.",
+      "revId": "44608f3e16e18ba17f3fd510e7193639a9fe1ade",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ffa59769_7663b1fa",
         "filename": "build.gradle",
         "patchSetId": 2
