@@ -2,6 +2,17 @@
 
 A framework to collect and post-process data from any source.
 
+* [Import](#import)
+* [Get Started](#get-started)
+  * [CollectorJob](#collectorjob)
+  * [DataCollectorServiceVerticle](#datacollectorserviceverticle)
+  * [DataCollectorServiceClient](#datacollectorserviceclient)
+* [Architecture](#architecture)
+* [JavaDoc](#javadoc)
+* [Run tests](#run-tests)
+* [Contribute](#contribute)
+  * [Code Style](#code-style)
+
 ## Import
 
 Maven
@@ -23,15 +34,18 @@ compile 'info.pascalkrause:vertx-datacollector:0.0.1'
 
 ## Get Started
 
-### Implement the CollectorJob
+### CollectorJob
 
-The first step is to implement the actual collector job (e.g. crawl a dataset from a website). The collector job should be implemented in the Future which is returned by the _collect()_ method. The Future will be executed in a seperate worker thread, which allows to have blocking operations here.
+The first step is to implement the actual collector job (e.g. crawl a dataset from a website). The collector job should
+be implemented in the Future which is returned by the _collect()_ method. The Future will be executed in a seperate
+worker thread, which allows to have blocking operations here.
 
 ```
 public Handler<Future<CollectorJobResult>> collect(String requestId, JsonObject feature);
 ```
 
-After the collection step is done, it is possible to do some post-processing stuff (e.g. write result into database) in the Future which is returned by the _postCollectAction_ method, which also can handle blocking operations.
+After the collection step is done, it is possible to do some post-processing stuff (e.g. write result into database)
+in the Future which is returned by the _postCollectAction_ method, which also can handle blocking operations.
 
 ```
 public Handler<Future<CollectorJobResult>> postCollectAction(AsyncResult<CollectorJobResult> result);
@@ -55,7 +69,8 @@ vertx.deployVerticle(verticle);
 
 ### DataCollectorServiceClient
 
-When the verticle was successfully deployed, the DataCollectorServiceClient can connect to the verticle. A list of methods which are offered by the DataCollectorServiceClient can be found [here](https://caspal.github.io/vertx-datacollector/info/pascalkrause/vertx/datacollector/client/DataCollectorServiceClient.html)
+When the verticle was successfully deployed, the DataCollectorServiceClient can connect to the verticle. A list of
+methods which are offered by the DataCollectorServiceClient can be found [here](https://caspal.github.io/vertx-datacollector/info/pascalkrause/vertx/datacollector/client/DataCollectorServiceClient.html).
 
 ```
 String ebAddress = "addressOfCollectorVerticle";
