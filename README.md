@@ -22,7 +22,7 @@ Maven
 <dependency>
   <groupId>info.pascalkrause</groupId>
   <artifactId>vertx-datacollector</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -30,7 +30,7 @@ Maven
 Gradle
 
 ```Gradle
-compile 'info.pascalkrause:vertx-datacollector:0.0.1'
+compile 'info.pascalkrause:vertx-datacollector:0.0.2'
 ```
 
 ## Get Started
