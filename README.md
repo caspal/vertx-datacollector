@@ -6,6 +6,7 @@ A framework to collect and post-process data from any source.
 * [Get Started](#get-started)
   * [CollectorJob](#collectorjob)
   * [DataCollectorServiceVerticle](#datacollectorserviceverticle)
+  * [DataCollectorService](#datacollectorservice)
   * [DataCollectorServiceClient](#datacollectorserviceclient)
 * [Architecture](#architecture)
 * [JavaDoc](#javadoc)
@@ -28,7 +29,7 @@ Maven
 
 Gradle
 
-```
+```Gradle
 compile 'info.pascalkrause:vertx-datacollector:0.0.1'
 ```
 
@@ -40,14 +41,14 @@ The first step is to implement the actual collector job (e.g. crawl a dataset fr
 be implemented in the Future which is returned by the _collect()_ method. The Future will be executed in a seperate
 worker thread, which allows to have blocking operations here.
 
-```
+```Java
 public Handler<Future<CollectorJobResult>> collect(String requestId, JsonObject feature);
 ```
 
 After the collection step is done, it is possible to do some post-processing stuff (e.g. write result into database)
 in the Future which is returned by the _postCollectAction_ method, which also can handle blocking operations.
 
-```
+```Java
 public Handler<Future<CollectorJobResult>> postCollectAction(AsyncResult<CollectorJobResult> result);
 ```
 
@@ -61,21 +62,39 @@ After implementing the CollectorJob, the verticle can be deployed.
 * **queueSize**: The queue size of CollectorJob requests
 * **enableMetrics**: Enables metrics for the DataCollectorService
 
-```
-DataCollectorServiceVerticle verticle = new DataCollectorServiceVerticle(ebAddress, job, workerPoolSize, queueSize, enableMetrics);
+```Java
+DataCollectorServiceVerticle verticle = new DataCollectorServiceVerticle(
+  ebAddress, job, workerPoolSize, queueSize, enableMetrics);
 
 vertx.deployVerticle(verticle);
 ```
 
+### DataCollectorService
+
+When the verticle was successfully deployed, the DataCollectorService can connect to the verticle. A list of
+methods which are offered by the DataCollectorService can be found
+[here](https://caspal.github.io/vertx-datacollector/info/pascalkrause/vertx/datacollector/service/DataCollectorService.html).
+
+```Java
+String ebAddress = "addressOfCollectorVerticle";
+DataCollectorServiceFactory factory = new DataCollectorServiceFactory(vertx, ebAddress);
+
+DataCollectorService dcs = factory.create();
+// or with DeliveryOptions
+DeliveryOptions delOpts = new DeliveryOptions .....
+DataCollectorService dcs = factory.create(delOpts);
+```
+
 ### DataCollectorServiceClient
 
-When the verticle was successfully deployed, the DataCollectorServiceClient can connect to the verticle. A list of
-methods which are offered by the DataCollectorServiceClient can be found [here](https://caspal.github.io/vertx-datacollector/info/pascalkrause/vertx/datacollector/client/DataCollectorServiceClient.html).
+The DataCollectorService is a Vert.x proxy which must stick to some restrictions to be able to translate this service
+also into other languages. The idea of the DataCollectorServiceClient is, having a Java client that can be used as a
+facade for the DataCollectorService to offer higher-value functions and do some Java specific converting e.g.
+error trasnformation. A list of methods which are offered by the DataCollectorServiceClient can be found
+[here](https://caspal.github.io/vertx-datacollector/info/pascalkrause/vertx/datacollector/client/DataCollectorServiceClient.html).
 
-```
-String ebAddress = "addressOfCollectorVerticle";
-DataCollectorService dcs = new DataCollectorServiceFactory(vertx, ebAddress).create();
-
+```Java
+DataCollectorService dcs = .....
 DataCollectorServiceClient dcsc = new DataCollectorServiceClient(dcs);
 ```
 
@@ -89,7 +108,7 @@ The latest JavaDoc can be found [here](https://caspal.github.io/vertx-datacollec
 
 ## Run tests
 
-```
+```Bash
 ./gradlew test
 ```
 
