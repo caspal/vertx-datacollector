@@ -114,7 +114,7 @@ The latest JavaDoc can be found [here](https://caspal.github.io/vertx-datacollec
 
 ## Contribute
 
-We are using Gerrit, so PRs in Github will probably overlooked. Please use [GerritHub.io](https://review.gerrithub.io)
+We are using Gerrit, so PRs in Github will probably be overlooked. Please use [GerritHub.io](https://review.gerrithub.io)
 to contribute changes. The project name is _caspal/vertx-datacollector_
 
 ### Code Style
