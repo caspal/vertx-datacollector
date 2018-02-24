@@ -25,14 +25,14 @@ public class DataCollectorServiceClient implements DataCollectorService {
     }
 
     @Override
-    public void performCollectionAndGetResult(String requestId, JsonObject feature,
+    public void collectAndReceive(String requestId, JsonObject feature,
             Handler<AsyncResult<CollectorJobResult>> resultHandler) {
-        dcs.performCollectionAndGetResult(requestId, feature, res -> resultHandler.handle(checkForError(res)));
+        dcs.collectAndReceive(requestId, feature, res -> resultHandler.handle(checkForError(res)));
     }
 
     @Override
-    public void performCollection(String requestId, JsonObject feature, Handler<AsyncResult<Void>> resultHandler) {
-        dcs.performCollection(requestId, feature, res -> resultHandler.handle(checkForError(res)));
+    public void collect(String requestId, JsonObject feature, Handler<AsyncResult<Void>> resultHandler) {
+        dcs.collect(requestId, feature, res -> resultHandler.handle(checkForError(res)));
     }
 
     @Override

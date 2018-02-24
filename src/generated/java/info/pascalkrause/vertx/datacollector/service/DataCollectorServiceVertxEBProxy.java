@@ -64,7 +64,7 @@ public class DataCollectorServiceVertxEBProxy implements DataCollectorService {
   }
 
   @Override
-  public void performCollectionAndGetResult(String requestId, JsonObject feature, Handler<AsyncResult<CollectorJobResult>> resultHandler) {
+  public void collectAndReceive(String requestId, JsonObject feature, Handler<AsyncResult<CollectorJobResult>> resultHandler) {
     if (closed) {
     resultHandler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
       return;
@@ -73,7 +73,7 @@ public class DataCollectorServiceVertxEBProxy implements DataCollectorService {
     _json.put("requestId", requestId);
     _json.put("feature", feature);
     DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
-    _deliveryOptions.addHeader("action", "performCollectionAndGetResult");
+    _deliveryOptions.addHeader("action", "collectAndReceive");
     _vertx.eventBus().<JsonObject>send(_address, _json, _deliveryOptions, res -> {
       if (res.failed()) {
         resultHandler.handle(Future.failedFuture(res.cause()));
@@ -84,7 +84,7 @@ public class DataCollectorServiceVertxEBProxy implements DataCollectorService {
   }
 
   @Override
-  public void performCollection(String requestId, JsonObject feature, Handler<AsyncResult<Void>> resultHandler) {
+  public void collect(String requestId, JsonObject feature, Handler<AsyncResult<Void>> resultHandler) {
     if (closed) {
     resultHandler.handle(Future.failedFuture(new IllegalStateException("Proxy is closed")));
       return;
@@ -93,7 +93,7 @@ public class DataCollectorServiceVertxEBProxy implements DataCollectorService {
     _json.put("requestId", requestId);
     _json.put("feature", feature);
     DeliveryOptions _deliveryOptions = (_options != null) ? new DeliveryOptions(_options) : new DeliveryOptions();
-    _deliveryOptions.addHeader("action", "performCollection");
+    _deliveryOptions.addHeader("action", "collect");
     _vertx.eventBus().<Void>send(_address, _json, _deliveryOptions, res -> {
       if (res.failed()) {
         resultHandler.handle(Future.failedFuture(res.cause()));

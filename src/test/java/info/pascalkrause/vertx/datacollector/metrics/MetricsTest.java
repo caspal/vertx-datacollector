@@ -87,24 +87,24 @@ public class MetricsTest {
         final AtomicInteger count = new AtomicInteger(0);
         classUnderTest = new DataCollectorServiceImpl(vertx, new TestJob(), 20, 30, true);
         IntStream.range(0, 2).forEach(i -> {
-            classUnderTest.performCollection(reqId, FEATURE_ERROR, (v) -> count.incrementAndGet());
-            classUnderTest.performCollection(reqId, new JsonObject().put(TestJob.KEY_ERROR_NAME, "someError2"),
+            classUnderTest.collect(reqId, FEATURE_ERROR, (v) -> count.incrementAndGet());
+            classUnderTest.collect(reqId, new JsonObject().put(TestJob.KEY_ERROR_NAME, "someError2"),
                     (v) -> count.incrementAndGet());
             a.countDown();
         });
         IntStream.range(0, 1).forEach(i -> {
-            classUnderTest.performCollection(reqId, new JsonObject().put(TestJob.KEY_ERROR_NAME, "someError3"),
+            classUnderTest.collect(reqId, new JsonObject().put(TestJob.KEY_ERROR_NAME, "someError3"),
                     (v) -> count.incrementAndGet());
-            classUnderTest.performCollection(reqId, new JsonObject().put(TestJob.KEY_ERROR_NAME, "someError4"),
+            classUnderTest.collect(reqId, new JsonObject().put(TestJob.KEY_ERROR_NAME, "someError4"),
                     (v) -> count.incrementAndGet());
             a.countDown();
         });
         IntStream.range(0, 10).forEach(i -> {
-            classUnderTest.performCollection(reqId, FEATURE_SUCCEEDED, (v) -> count.incrementAndGet());
+            classUnderTest.collect(reqId, FEATURE_SUCCEEDED, (v) -> count.incrementAndGet());
             a.countDown();
         });
         IntStream.range(0, 4).forEach(i -> {
-            classUnderTest.performCollection(reqId, FEATURE_HANDLED_EXCEPTION, (v) -> count.incrementAndGet());
+            classUnderTest.collect(reqId, FEATURE_HANDLED_EXCEPTION, (v) -> count.incrementAndGet());
             a.countDown();
         });
         a.await(TimeUnit.SECONDS.toMillis(TestUtils.DEBUG_MODE ? 999999 : 1));
@@ -123,9 +123,9 @@ public class MetricsTest {
         final String reqId = "myRequest";
         final AtomicInteger count = new AtomicInteger(0);
         classUnderTest = new DataCollectorServiceImpl(vertx, new TestJob(a), 10, 30, true);
-        classUnderTest.performCollection(reqId, FEATURE_STOP, (v) -> count.incrementAndGet());
-        classUnderTest.performCollection(reqId, FEATURE_STOP, (v) -> count.incrementAndGet());
-        classUnderTest.performCollection(reqId, FEATURE_STOP, (v) -> count.incrementAndGet());
+        classUnderTest.collect(reqId, FEATURE_STOP, (v) -> count.incrementAndGet());
+        classUnderTest.collect(reqId, FEATURE_STOP, (v) -> count.incrementAndGet());
+        classUnderTest.collect(reqId, FEATURE_STOP, (v) -> count.incrementAndGet());
 
         assertThat(classUnderTest.getMetricsSnapshot())
                 .isEqualTo(buildExpectedMetricsObject(0, 0, 0, 0, 30, 27, 3, new JsonObject(), new JsonObject()));

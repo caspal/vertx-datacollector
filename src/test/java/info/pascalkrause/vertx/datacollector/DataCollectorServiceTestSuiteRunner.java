@@ -42,9 +42,9 @@ public class DataCollectorServiceTestSuiteRunner {
                 .setSendTimeout(TimeUnit.SECONDS.toMillis(TestUtils.DEBUG_MODE ? 999999 : 1));
         final DataCollectorTestSuite testSute = new DataCollectorTestSuite("DataCollectorService", verticle, delOpts);
 
-        testSute.addTest("performCollectionAndGetResult", getPerformCollectionAndGetResultTest());
-        testSute.addTest("performCollectionAndGetResultWithError", getPerformCollectionAndGetResultWithErrorTest());
-        testSute.addTest("performCollection", getPerformCollectionTest());
+        testSute.addTest("collectAndReceive", getCollectAndReceiveTest());
+        testSute.addTest("collectAndReceiveWithError", getCollectAndReceiveWithErrorTest());
+        testSute.addTest("collect", getCollectTest());
         testSute.addTest("responseQueueFull", getResponseQueueFullTest());
         testSute.addTest("queueAcceptsJobsAgainAfterFull", getQueueAcceptsJobsAgainAfterFullTest());
         testSute.addTest("getMetricsSnapshot", getMetricsSnapshotTest());
@@ -58,14 +58,14 @@ public class DataCollectorServiceTestSuiteRunner {
         testContextComplete.complete();
     }
 
-    private Function<Supplier<DataCollectorServiceClient>, Handler<TestContext>> getPerformCollectionAndGetResultTest() {
+    private Function<Supplier<DataCollectorServiceClient>, Handler<TestContext>> getCollectAndReceiveTest() {
         return dcs -> {
             final String requestId = UUID.randomUUID().toString();
             final CollectorJobResult expectedResult = new CollectorJobResult(requestId, "test-src", "test-quality",
                     "test-created", new JsonObject(), null);
             return c -> {
                 final Async testComplete = c.async();
-                dcs.get().performCollectionAndGetResult(requestId, feature, res -> {
+                dcs.get().collectAndReceive(requestId, feature, res -> {
                     TestUtils.runTruthTests(c, v -> {
                         assertThat(res.succeeded()).isTrue();
                         assertThat(res.result()).isEqualTo(expectedResult);
@@ -76,7 +76,7 @@ public class DataCollectorServiceTestSuiteRunner {
         };
     }
 
-    private Function<Supplier<DataCollectorServiceClient>, Handler<TestContext>> getPerformCollectionAndGetResultWithErrorTest() {
+    private Function<Supplier<DataCollectorServiceClient>, Handler<TestContext>> getCollectAndReceiveWithErrorTest() {
         return dcs -> {
             final String requestId = UUID.randomUUID().toString();
             final String errorName = "myError";
@@ -84,24 +84,23 @@ public class DataCollectorServiceTestSuiteRunner {
                     "test-created", new JsonObject(), new CollectorJobResult.Error(errorName));
             return c -> {
                 final Async testComplete = c.async();
-                dcs.get().performCollectionAndGetResult(requestId,
-                        feature.copy().put(TestJob.KEY_ERROR_NAME, errorName), res -> {
-                            TestUtils.runTruthTests(c, v -> {
-                                assertThat(res.succeeded()).isTrue();
-                                assertThat(res.result()).isEqualTo(expectedResult);
-                            });
-                            testComplete.complete();
-                        });
+                dcs.get().collectAndReceive(requestId, feature.copy().put(TestJob.KEY_ERROR_NAME, errorName), res -> {
+                    TestUtils.runTruthTests(c, v -> {
+                        assertThat(res.succeeded()).isTrue();
+                        assertThat(res.result()).isEqualTo(expectedResult);
+                    });
+                    testComplete.complete();
+                });
             };
         };
     }
 
-    private Function<Supplier<DataCollectorServiceClient>, Handler<TestContext>> getPerformCollectionTest() {
+    private Function<Supplier<DataCollectorServiceClient>, Handler<TestContext>> getCollectTest() {
         return dcs -> {
             final String requestId = UUID.randomUUID().toString();
             return c -> {
                 final Async testComplete = c.async();
-                dcs.get().performCollection(requestId, feature, res -> {
+                dcs.get().collect(requestId, feature, res -> {
                     TestUtils.runTruthTests(c, v -> assertThat(res.succeeded()).isTrue());
                     testComplete.complete();
                 });
@@ -114,20 +113,18 @@ public class DataCollectorServiceTestSuiteRunner {
             return c -> {
                 final Async testComplete = c.async(3);
                 IntStream.of(1, 2, 3).mapToObj(i -> i + "").forEach(requestId -> {
-                    dcs.get().performCollectionAndGetResult(requestId, feature.copy().put(TestJob.KEY_SLEEP, 10),
-                            res -> {
-                                if (res.succeeded()) {
-                                    TestUtils.runTruthTests(c,
-                                            v -> assertThat(res.result().getRequestId()).isAnyOf("1", "2"));
-                                } else {
-                                    TestUtils.runTruthTests(c,
-                                            v -> assertThat(res.cause()).isInstanceOf(QueueLimitReached.class));
-                                }
-                                testComplete.countDown();
-                                if (!testComplete.isCompleted() && (testComplete.count() == 0)) {
-                                    testComplete.complete();
-                                }
-                            });
+                    dcs.get().collectAndReceive(requestId, feature.copy().put(TestJob.KEY_SLEEP, 10), res -> {
+                        if (res.succeeded()) {
+                            TestUtils.runTruthTests(c, v -> assertThat(res.result().getRequestId()).isAnyOf("1", "2"));
+                        } else {
+                            TestUtils.runTruthTests(c,
+                                    v -> assertThat(res.cause()).isInstanceOf(QueueLimitReached.class));
+                        }
+                        testComplete.countDown();
+                        if (!testComplete.isCompleted() && (testComplete.count() == 0)) {
+                            testComplete.complete();
+                        }
+                    });
                 });
             };
         };
@@ -138,22 +135,21 @@ public class DataCollectorServiceTestSuiteRunner {
             return c -> {
                 final Async testComplete = c.async();
                 IntStream.of(1, 2, 3).mapToObj(i -> i + "").forEach(requestId -> {
-                    dcs.get().performCollectionAndGetResult(requestId, feature.copy().put(TestJob.KEY_SLEEP, 10),
-                            res -> {
-                                if (res.failed()) {
-                                    TestUtils.runTruthTests(c,
-                                            v -> assertThat(res.cause()).isInstanceOf(QueueLimitReached.class));
-                                    try {
-                                        Thread.sleep(20);
-                                        dcs.get().performCollectionAndGetResult(requestId, feature, res2 -> {
-                                            TestUtils.runTruthTests(c, v -> assertThat(res2.succeeded()).isTrue());
-                                            testComplete.complete();
-                                        });
-                                    } catch (final InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            });
+                    dcs.get().collectAndReceive(requestId, feature.copy().put(TestJob.KEY_SLEEP, 10), res -> {
+                        if (res.failed()) {
+                            TestUtils.runTruthTests(c,
+                                    v -> assertThat(res.cause()).isInstanceOf(QueueLimitReached.class));
+                            try {
+                                Thread.sleep(20);
+                                dcs.get().collectAndReceive(requestId, feature, res2 -> {
+                                    TestUtils.runTruthTests(c, v -> assertThat(res2.succeeded()).isTrue());
+                                    testComplete.complete();
+                                });
+                            } catch (final InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
                 });
             };
         };

@@ -22,18 +22,18 @@ public interface DataCollectorService {
      * @param feature A JSON object to pass attributes and properties which are needed for the collection process.
      * @param resultHandler A handler to process the result.
      */
-    public void performCollectionAndGetResult(String requestId, JsonObject feature,
+    public void collectAndReceive(String requestId, JsonObject feature,
             Handler<AsyncResult<CollectorJobResult>> resultHandler);
 
     /**
-     * This method is doing the same as {@link #performCollectionAndGetResult(String, JsonObject, Handler)}, but will
+     * This method is doing the same as {@link #collectAndReceive(String, JsonObject, Handler)}, but will
      * not send back the result. It will just send back the information if the job succeeded or failed.
      *
      * @param requestId A request id to identify the collection request.
      * @param feature A JSON object to pass attributes and properties which are needed for the collection process.
      * @param resultHandler A handler to process the result.
      */
-    public void performCollection(String requestId, JsonObject feature, Handler<AsyncResult<Void>> resultHandler);
+    public void collect(String requestId, JsonObject feature, Handler<AsyncResult<Void>> resultHandler);
 
     /**
      * Returns a JsonObject which contains a current snapshot of the metrics. The JsonObject has more or less the

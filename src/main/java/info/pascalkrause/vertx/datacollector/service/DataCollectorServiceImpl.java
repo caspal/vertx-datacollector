@@ -37,7 +37,7 @@ public class DataCollectorServiceImpl implements DataCollectorService {
     }
 
     @Override
-    public void performCollectionAndGetResult(String requestId, JsonObject feature,
+    public void collectAndReceive(String requestId, JsonObject feature,
             Handler<AsyncResult<CollectorJobResult>> resultHandler) {
         if (currentQueueSize.intValue() < queueSize) {
             currentQueueSize.incrementAndGet();
@@ -57,8 +57,8 @@ public class DataCollectorServiceImpl implements DataCollectorService {
     }
 
     @Override
-    public void performCollection(String requestId, JsonObject feature, Handler<AsyncResult<Void>> resultHandler) {
-        performCollectionAndGetResult(requestId, feature, res -> {
+    public void collect(String requestId, JsonObject feature, Handler<AsyncResult<Void>> resultHandler) {
+        collectAndReceive(requestId, feature, res -> {
             resultHandler.handle(res.failed() ? Future.failedFuture(res.cause()) : Future.succeededFuture());
         });
     }

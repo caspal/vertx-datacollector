@@ -116,8 +116,8 @@ public class DataCollectorServiceVertxProxyHandler extends ProxyHandler {
       }
       accessed();
       switch (action) {
-        case "performCollectionAndGetResult": {
-          service.performCollectionAndGetResult((java.lang.String)json.getValue("requestId"), (io.vertx.core.json.JsonObject)json.getValue("feature"), res -> {
+        case "collectAndReceive": {
+          service.collectAndReceive((java.lang.String)json.getValue("requestId"), (io.vertx.core.json.JsonObject)json.getValue("feature"), res -> {
             if (res.failed()) {
               if (res.cause() instanceof ServiceException) {
                 msg.reply(res.cause());
@@ -130,8 +130,8 @@ public class DataCollectorServiceVertxProxyHandler extends ProxyHandler {
          });
           break;
         }
-        case "performCollection": {
-          service.performCollection((java.lang.String)json.getValue("requestId"), (io.vertx.core.json.JsonObject)json.getValue("feature"), createHandler(msg));
+        case "collect": {
+          service.collect((java.lang.String)json.getValue("requestId"), (io.vertx.core.json.JsonObject)json.getValue("feature"), createHandler(msg));
           break;
         }
         case "getMetricsSnapshot": {
