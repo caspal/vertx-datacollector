@@ -16,7 +16,7 @@ public interface DataCollectorService {
     /**
      * This method triggers a {@link CollectorJob} and receives the {@link CollectorJobResult} in the passed result
      * handler. If the queue of the DataCollectorServiceVerticle is already full, the response will be a failed
-     * AsyncResult with the message which is speified in {@link DataCollectorService#ERROR_QUEUE_LIMIT_REACHED}.
+     * AsyncResult with the message which is specified in {@link DataCollectorService#ERROR_QUEUE_LIMIT_REACHED}.
      *
      * @param requestId A request id to identify the collection request.
      * @param feature A JSON object to pass attributes and properties which are needed for the collection process.
@@ -26,8 +26,8 @@ public interface DataCollectorService {
             Handler<AsyncResult<CollectorJobResult>> resultHandler);
 
     /**
-     * This method is doing the same as {@link #collectAndReceive(String, JsonObject, Handler)}, but will
-     * not send back the result. It will just send back the information if the job succeeded or failed.
+     * This method is doing the same as {@link #collectAndReceive(String, JsonObject, Handler)}, but will not send back
+     * the result. It will just send back the information if the job succeeded or failed.
      *
      * @param requestId A request id to identify the collection request.
      * @param feature A JSON object to pass attributes and properties which are needed for the collection process.
