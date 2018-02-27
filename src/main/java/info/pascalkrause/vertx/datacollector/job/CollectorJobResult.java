@@ -69,8 +69,9 @@ public class CollectorJobResult {
     public CollectorJobResult(String requestId, String source, String quality, String created, JsonObject result,
             Error error) {
         super();
+        result = Objects.nonNull(result) ? result : new JsonObject();
         data.put(KEY_REQUEST_ID, requestId).put(KEY_SOURCE, source).put(KEY_QUALITY, quality).put(KEY_CREATED, created)
-                .put(KEY_RESULT, result).put(KEY_ERROR, error);
+                .put(KEY_RESULT, result).put(KEY_ERROR, Objects.nonNull(error) ? error : new JsonObject());
     }
 
     public String getRequestId() {
