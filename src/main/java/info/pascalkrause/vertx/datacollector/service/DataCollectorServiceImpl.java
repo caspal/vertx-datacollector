@@ -1,6 +1,7 @@
 package info.pascalkrause.vertx.datacollector.service;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.codahale.metrics.MetricRegistry;
@@ -24,8 +25,9 @@ public class DataCollectorServiceImpl implements DataCollectorService {
     private final MetricSnapshotFactory metricFactory;
 
     public DataCollectorServiceImpl(Vertx vertx, CollectorJob job, int workerPoolSize, int queueSize,
-            boolean enableMetrics) {
-        collectorJobExecutor = vertx.createSharedWorkerExecutor("CollectorJobExecutor-Pool", workerPoolSize);
+            boolean enableMetrics, long maxExecuteTimeout) {
+        collectorJobExecutor = vertx.createSharedWorkerExecutor("CollectorJobExecutor-Pool", workerPoolSize,
+                TimeUnit.MILLISECONDS.toNanos(maxExecuteTimeout));
         collectorJob = job;
         this.queueSize = queueSize;
         if (enableMetrics) {

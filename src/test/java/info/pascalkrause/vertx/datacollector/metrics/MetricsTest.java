@@ -34,6 +34,7 @@ public class MetricsTest {
 
     private DataCollectorServiceImpl classUnderTest;
     private Vertx vertx;
+    private final long defaultExecutorTimeout = TimeUnit.MINUTES.toMillis(1);
 
     private JsonObject buildExpectedMetricsObject(int METRIC_TOTAL_JOBS_COUNT, int METRIC_TOTAL_JOBS_FAILED,
             int METRIC_TOTAL_JOBS_SUCCEEDED, int METRIC_TOTAL_JOBS_EXCEPTION, int METRIC_QUEUE_MAX_SIZE,
@@ -68,14 +69,14 @@ public class MetricsTest {
 
     @Test
     public void testNoMetricss() {
-        classUnderTest = new DataCollectorServiceImpl(vertx, new TestJob(), 2, 10, false);
+        classUnderTest = new DataCollectorServiceImpl(vertx, new TestJob(), 2, 10, false, defaultExecutorTimeout);
         assertThat(classUnderTest.getMetricsSnapshot())
                 .isEqualTo(new JsonObject().put("Error", "Metrics are not enabled"));
     }
 
     @Test
     public void testNoMetricsAndEmptyMetrics() {
-        classUnderTest = new DataCollectorServiceImpl(vertx, new TestJob(), 10, 30, true);
+        classUnderTest = new DataCollectorServiceImpl(vertx, new TestJob(), 10, 30, true, defaultExecutorTimeout);
         assertThat(classUnderTest.getMetricsSnapshot())
                 .isEqualTo(buildExpectedMetricsObject(0, 0, 0, 0, 30, 30, 0, new JsonObject(), new JsonObject()));
     }
@@ -85,7 +86,7 @@ public class MetricsTest {
         final Async a = c.async(17);
         final String reqId = "myRequest";
         final AtomicInteger count = new AtomicInteger(0);
-        classUnderTest = new DataCollectorServiceImpl(vertx, new TestJob(), 20, 30, true);
+        classUnderTest = new DataCollectorServiceImpl(vertx, new TestJob(), 20, 30, true, defaultExecutorTimeout);
         IntStream.range(0, 2).forEach(i -> {
             classUnderTest.collect(reqId, FEATURE_ERROR, (v) -> count.incrementAndGet());
             classUnderTest.collect(reqId, new JsonObject().put(TestJob.KEY_ERROR_NAME, "someError2"),
@@ -122,7 +123,7 @@ public class MetricsTest {
         final Async a = c.async();
         final String reqId = "myRequest";
         final AtomicInteger count = new AtomicInteger(0);
-        classUnderTest = new DataCollectorServiceImpl(vertx, new TestJob(a), 10, 30, true);
+        classUnderTest = new DataCollectorServiceImpl(vertx, new TestJob(a), 10, 30, true, defaultExecutorTimeout);
         classUnderTest.collect(reqId, FEATURE_STOP, (v) -> count.incrementAndGet());
         classUnderTest.collect(reqId, FEATURE_STOP, (v) -> count.incrementAndGet());
         classUnderTest.collect(reqId, FEATURE_STOP, (v) -> count.incrementAndGet());

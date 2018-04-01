@@ -1,5 +1,7 @@
 package info.pascalkrause.vertx.datacollector;
 
+import java.util.concurrent.TimeUnit;
+
 import info.pascalkrause.vertx.datacollector.job.CollectorJob;
 import info.pascalkrause.vertx.datacollector.service.DataCollectorService;
 import info.pascalkrause.vertx.datacollector.service.DataCollectorServiceImpl;
@@ -18,6 +20,7 @@ public class DataCollectorServiceVerticle extends AbstractVerticle {
     private final int workerPoolSize;
     private final int queueSize;
     private final boolean enableMetrics;
+    private final long maxExecuteTimeout;
 
     private DataCollectorService dcs;
     private ServiceBinder binder;
@@ -32,17 +35,31 @@ public class DataCollectorServiceVerticle extends AbstractVerticle {
      */
     public DataCollectorServiceVerticle(String address, CollectorJob job, int workerPoolSize, int queueSize,
             boolean enableMetrics) {
+        this(address, job, workerPoolSize, queueSize, enableMetrics, TimeUnit.MINUTES.toMillis(1));
+    }
+
+    /**
+     * @param address The eventbus address
+     * @param job The job which will be processed in the CollectorJobExecutor
+     * @param workerPoolSize The pool size of the CollectorJobExecutor
+     * @param queueSize The queue size of CollectorJob requests
+     * @param enableMetrics Enables metrics for the DataCollectorService
+     * @param maxExecuteTimeout Timeout for a job in the ExecutorPool in milliseconds
+     */
+    public DataCollectorServiceVerticle(String address, CollectorJob job, int workerPoolSize, int queueSize,
+            boolean enableMetrics, long maxExecuteTimeout) {
         this.address = address;
         this.job = job;
         this.workerPoolSize = workerPoolSize;
         this.queueSize = queueSize;
         this.enableMetrics = enableMetrics;
+        this.maxExecuteTimeout = maxExecuteTimeout;
     }
 
     @Override
     public void init(Vertx vertx, Context context) {
         super.init(vertx, context);
-        dcs = new DataCollectorServiceImpl(vertx, job, workerPoolSize, queueSize, enableMetrics);
+        dcs = new DataCollectorServiceImpl(vertx, job, workerPoolSize, queueSize, enableMetrics, maxExecuteTimeout);
         binder = new ServiceBinder(vertx);
     }
 
