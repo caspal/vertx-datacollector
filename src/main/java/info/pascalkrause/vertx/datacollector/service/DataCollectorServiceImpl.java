@@ -19,6 +19,7 @@ import io.vertx.core.json.JsonObject;
 public class DataCollectorServiceImpl implements DataCollectorService {
 
     private final WorkerExecutor collectorJobExecutor;
+    private final WorkerExecutor postCollectExecutor;
     private final CollectorJob collectorJob;
     private final int queueSize;
     private final AtomicInteger currentQueueSize = new AtomicInteger(0);
@@ -27,6 +28,8 @@ public class DataCollectorServiceImpl implements DataCollectorService {
     public DataCollectorServiceImpl(Vertx vertx, CollectorJob job, int workerPoolSize, int queueSize,
             boolean enableMetrics, long maxExecuteTimeout) {
         collectorJobExecutor = vertx.createSharedWorkerExecutor("CollectorJobExecutor-Pool", workerPoolSize,
+                TimeUnit.MILLISECONDS.toNanos(maxExecuteTimeout));
+        postCollectExecutor = vertx.createSharedWorkerExecutor("PostCollectExecutor-Pool", workerPoolSize,
                 TimeUnit.MILLISECONDS.toNanos(maxExecuteTimeout));
         collectorJob = job;
         this.queueSize = queueSize;
@@ -44,7 +47,7 @@ public class DataCollectorServiceImpl implements DataCollectorService {
         if (currentQueueSize.intValue() < queueSize) {
             currentQueueSize.incrementAndGet();
             collectorJobExecutor.executeBlocking(collectorJob.collect(requestId, feature), false, collectResult -> {
-                collectorJobExecutor.executeBlocking(collectorJob.postCollectAction(collectResult), false,
+                postCollectExecutor.executeBlocking(collectorJob.postCollectAction(collectResult), false,
                         postResult -> {
                             currentQueueSize.decrementAndGet();
                             if (Objects.nonNull(metricFactory)) {
