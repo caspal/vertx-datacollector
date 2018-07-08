@@ -59,7 +59,8 @@ public class DataCollectorServiceVerticle extends AbstractVerticle {
     @Override
     public void init(Vertx vertx, Context context) {
         super.init(vertx, context);
-        dcs = new DataCollectorServiceImpl(vertx, job, workerPoolSize, queueSize, enableMetrics, maxExecuteTimeout);
+        dcs = new DataCollectorServiceImpl(vertx, job, workerPoolSize, queueSize, enableMetrics, maxExecuteTimeout,
+                address);
         binder = new ServiceBinder(vertx);
     }
 

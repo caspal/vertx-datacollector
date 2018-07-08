@@ -26,10 +26,11 @@ public class DataCollectorServiceImpl implements DataCollectorService {
     private final MetricSnapshotFactory metricFactory;
 
     public DataCollectorServiceImpl(Vertx vertx, CollectorJob job, int workerPoolSize, int queueSize,
-            boolean enableMetrics, long maxExecuteTimeout) {
-        collectorJobExecutor = vertx.createSharedWorkerExecutor("CollectorJobExecutor-Pool", workerPoolSize,
+            boolean enableMetrics, long maxExecuteTimeout, String address) {
+        address = address.replaceAll(" ", "");
+        collectorJobExecutor = vertx.createSharedWorkerExecutor("CollectorJobExecutor-Pool-" + address, workerPoolSize,
                 TimeUnit.MILLISECONDS.toNanos(maxExecuteTimeout));
-        postCollectExecutor = vertx.createSharedWorkerExecutor("PostCollectExecutor-Pool", workerPoolSize,
+        postCollectExecutor = vertx.createSharedWorkerExecutor("PostCollectExecutor-Pool-" + address, workerPoolSize,
                 TimeUnit.MILLISECONDS.toNanos(maxExecuteTimeout));
         collectorJob = job;
         this.queueSize = queueSize;
